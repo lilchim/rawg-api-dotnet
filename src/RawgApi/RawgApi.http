@@ -1,0 +1,23 @@
+GET http://localhost:5254/api/status
+
+###
+
+GET http://localhost:5254/api/status/health
+
+###
+
+GET http://localhost:5254/api/games?search=action&page_size=5
+
+###
+
+GET http://localhost:5254/api/games/3498
+
+###
+
+GET http://localhost:5254/api/platforms?page_size=10
+
+###
+
+GET http://localhost:5254/api/genres?page_size=10
+
+###

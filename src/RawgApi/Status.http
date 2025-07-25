@@ -1,0 +1,17 @@
+# Status Controller Tests
+# Base URL: http://localhost:5254
+
+### Test API Status
+GET http://localhost:5254/api/status
+
+###
+
+### Test Health Check
+GET http://localhost:5254/api/status/health
+
+###
+
+### Test API Info
+GET http://localhost:5254/api/status/info
+
+### 
