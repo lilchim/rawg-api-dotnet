@@ -1,0 +1,68 @@
+# Games Controller Tests
+# Base URL: http://localhost:5254
+
+### Get all games (default)
+GET http://localhost:5254/api/games
+
+###
+
+### Get games with search
+GET http://localhost:5254/api/games?search=zelda
+
+###
+
+### Get games with pagination
+GET http://localhost:5254/api/games?page=2&page_size=10
+
+###
+
+### Get specific game by ID (Grand Theft Auto V)
+GET http://localhost:5254/api/games/3498
+
+###
+
+### Get specific game by ID (The Witcher 3)
+GET http://localhost:5254/api/games/3328
+
+###
+
+### Get specific game by ID (Red Dead Redemption 2)
+GET http://localhost:5254/api/games/28
+
+###
+
+### Get game screenshots
+GET http://localhost:5254/api/games/3498/screenshots
+
+###
+
+### Get game screenshots with pagination
+GET http://localhost:5254/api/games/3498/screenshots?page=2&page_size=5
+
+###
+
+### Get game DLCs/additions
+GET http://localhost:5254/api/games/3498/additions
+
+###
+
+### Get game stores
+GET http://localhost:5254/api/games/3498/stores
+
+###
+
+### Get game parent (if it's a DLC)
+GET http://localhost:5254/api/games/3498/parent
+
+###
+
+### Get game series
+GET http://localhost:5254/api/games/3498/series
+
+###
+
+### Test with API Key (if enabled)
+GET http://localhost:5254/api/games
+X-API-Key: your-dev-key
+
+### 

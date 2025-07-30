@@ -1,0 +1,48 @@
+# Platforms Controller Tests
+# Base URL: http://localhost:5254
+
+### Get all platforms
+GET http://localhost:5254/api/platforms
+
+###
+
+### Get platforms with pagination
+GET http://localhost:5254/api/platforms?page=2&page_size=10
+
+###
+
+### Get specific platform by ID (PC)
+GET http://localhost:5254/api/platforms/4
+
+###
+
+### Get specific platform by ID (PlayStation 5)
+GET http://localhost:5254/api/platforms/187
+
+###
+
+### Get specific platform by ID (Xbox Series X)
+GET http://localhost:5254/api/platforms/186
+
+###
+
+### Get specific platform by ID (Nintendo Switch)
+GET http://localhost:5254/api/platforms/7
+
+###
+
+### Get specific platform by ID (iOS)
+GET http://localhost:5254/api/platforms/3
+
+###
+
+### Get specific platform by ID (Android)
+GET http://localhost:5254/api/platforms/21
+
+###
+
+### Test with API Key (if enabled)
+GET http://localhost:5254/api/platforms
+X-API-Key: your-dev-key
+
+### 

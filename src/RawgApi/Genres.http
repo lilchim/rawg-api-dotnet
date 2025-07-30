@@ -1,0 +1,58 @@
+# Genres Controller Tests
+# Base URL: http://localhost:5254
+
+### Get all genres
+GET http://localhost:5254/api/genres
+
+###
+
+### Get genres with pagination
+GET http://localhost:5254/api/genres?page=2&page_size=10
+
+###
+
+### Get specific genre by ID (Action)
+GET http://localhost:5254/api/genres/4
+
+###
+
+### Get specific genre by ID (Adventure)
+GET http://localhost:5254/api/genres/3
+
+###
+
+### Get specific genre by ID (RPG)
+GET http://localhost:5254/api/genres/5
+
+###
+
+### Get specific genre by ID (Strategy)
+GET http://localhost:5254/api/genres/10
+
+###
+
+### Get specific genre by ID (Shooter)
+GET http://localhost:5254/api/genres/2
+
+###
+
+### Get specific genre by ID (Sports)
+GET http://localhost:5254/api/genres/15
+
+###
+
+### Get specific genre by ID (Racing)
+GET http://localhost:5254/api/genres/1
+
+###
+
+### Get specific genre by ID (Puzzle)
+GET http://localhost:5254/api/genres/7
+
+###
+
+### Test with API Key (if enabled)
+GET http://localhost:5254/api/genres
+X-API-Key: your-dev-key
+
+### 
