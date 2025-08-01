@@ -40,7 +40,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: .
-        file: ./docker/Dockerfile.dockerfile
+        file: ./docker/rawgapi.dockerfile
         push: true
         tags: ${{ steps.tags.outputs.tags }}
         cache-from: type=gha
