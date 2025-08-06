@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Logging;
 using RawgApi.Models;
 using System.Text.Json;
+using RawgApi.Client.DTO;
 
 namespace RawgApi.Client;
 
@@ -45,6 +46,72 @@ public class RawgApiClient
             parameters.Add($"page_size={pageSize}");
 
         var queryString = parameters.Count > 0 ? "?" + string.Join("&", parameters) : "";
+        var response = await _httpClient.GetAsync($"/api/games{queryString}");
+        
+        response.EnsureSuccessStatusCode();
+        
+        var content = await response.Content.ReadAsStringAsync();
+        return JsonSerializer.Deserialize<PaginatedResponse<Game>>(content, _jsonOptions) 
+            ?? throw new InvalidOperationException("Failed to deserialize games response");
+    }
+
+    /// <summary>
+    /// Get a list of games with comprehensive filtering options
+    /// </summary>
+    /// <param name="parameters">Query parameters for filtering games</param>
+    /// <returns>Paginated list of games</returns>
+    public async Task<PaginatedResponse<Game>> GetGamesAsync(GamesQueryParameters parameters)
+    {
+        var queryParams = new List<string>();
+        
+        if (!string.IsNullOrEmpty(parameters.Search))
+            queryParams.Add($"search={Uri.EscapeDataString(parameters.Search)}");
+        if (parameters.SearchPrecise.HasValue)
+            queryParams.Add($"search_precise={parameters.SearchPrecise.Value.ToString().ToLower()}");
+        if (parameters.SearchExact.HasValue)
+            queryParams.Add($"search_exact={parameters.SearchExact.Value.ToString().ToLower()}");
+        if (!string.IsNullOrEmpty(parameters.ParentPlatforms))
+            queryParams.Add($"parent_platforms={Uri.EscapeDataString(parameters.ParentPlatforms)}");
+        if (!string.IsNullOrEmpty(parameters.Platforms))
+            queryParams.Add($"platforms={Uri.EscapeDataString(parameters.Platforms)}");
+        if (!string.IsNullOrEmpty(parameters.Stores))
+            queryParams.Add($"stores={Uri.EscapeDataString(parameters.Stores)}");
+        if (!string.IsNullOrEmpty(parameters.Developers))
+            queryParams.Add($"developers={Uri.EscapeDataString(parameters.Developers)}");
+        if (!string.IsNullOrEmpty(parameters.Publishers))
+            queryParams.Add($"publishers={Uri.EscapeDataString(parameters.Publishers)}");
+        if (!string.IsNullOrEmpty(parameters.Genres))
+            queryParams.Add($"genres={Uri.EscapeDataString(parameters.Genres)}");
+        if (!string.IsNullOrEmpty(parameters.Tags))
+            queryParams.Add($"tags={Uri.EscapeDataString(parameters.Tags)}");
+        if (!string.IsNullOrEmpty(parameters.Creators))
+            queryParams.Add($"creators={Uri.EscapeDataString(parameters.Creators)}");
+        if (!string.IsNullOrEmpty(parameters.Dates))
+            queryParams.Add($"dates={Uri.EscapeDataString(parameters.Dates)}");
+        if (!string.IsNullOrEmpty(parameters.Updated))
+            queryParams.Add($"updated={Uri.EscapeDataString(parameters.Updated)}");
+        if (parameters.PlatformsCount.HasValue)
+            queryParams.Add($"platforms_count={parameters.PlatformsCount.Value}");
+        if (!string.IsNullOrEmpty(parameters.Metacritic))
+            queryParams.Add($"metacritic={Uri.EscapeDataString(parameters.Metacritic)}");
+        if (parameters.ExcludeCollection.HasValue)
+            queryParams.Add($"exclude_collection={parameters.ExcludeCollection.Value}");
+        if (parameters.ExcludeAdditions.HasValue)
+            queryParams.Add($"exclude_additions={parameters.ExcludeAdditions.Value}");
+        if (parameters.ExcludeParents.HasValue)
+            queryParams.Add($"exclude_parents={parameters.ExcludeParents.Value}");
+        if (parameters.ExcludeGameSeries.HasValue)
+            queryParams.Add($"exclude_game_series={parameters.ExcludeGameSeries.Value}");
+        if (!string.IsNullOrEmpty(parameters.ExcludeStores))
+            queryParams.Add($"exclude_stores={Uri.EscapeDataString(parameters.ExcludeStores)}");
+        if (!string.IsNullOrEmpty(parameters.Ordering))
+            queryParams.Add($"ordering={Uri.EscapeDataString(parameters.Ordering)}");
+        if (parameters.Page > 1)
+            queryParams.Add($"page={parameters.Page}");
+        if (parameters.PageSize != 20)
+            queryParams.Add($"page_size={Math.Min(parameters.PageSize, 40)}");
+
+        var queryString = queryParams.Count > 0 ? "?" + string.Join("&", queryParams) : "";
         var response = await _httpClient.GetAsync($"/api/games{queryString}");
         
         response.EnsureSuccessStatusCode();
