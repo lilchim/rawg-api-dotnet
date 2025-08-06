@@ -92,22 +92,31 @@ builder.Services.AddSwaggerGen(c =>
     {
         c.IncludeXmlComments(xmlPath);
     }
+    else
+    {
+        // Fallback to build-time XML file
+        var buildXmlPath = Path.Combine(AppContext.BaseDirectory, "RawgApi.xml");
+        if (File.Exists(buildXmlPath))
+        {
+            c.IncludeXmlComments(buildXmlPath);
+        }
+    }
 });
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseSwagger(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "RAWG API Proxy v1");
-        c.RoutePrefix = "swagger";
-    });
-}
+    c.RouteTemplate = "swagger/{documentName}/swagger.json";
+});
 
-app.UseHttpsRedirection();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "RAWG API Proxy v1");
+    c.RoutePrefix = "swagger";
+    c.DocumentTitle = "RAWG API Proxy Documentation";
+});
 
 // Use CORS
 app.UseCors();
@@ -118,5 +127,8 @@ app.UseMiddleware<ApiKeyAuthenticationMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Add a simple test endpoint
+app.MapGet("/test", () => "API is running!");
 
 app.Run();

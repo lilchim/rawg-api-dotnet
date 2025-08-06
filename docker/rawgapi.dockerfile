@@ -29,9 +29,5 @@ COPY --from=publish /app/publish .
 # Expose port 80
 EXPOSE 80
 
-# Set environment variables
-ENV ASPNETCORE_URLS=http://+:80
-ENV ASPNETCORE_ENVIRONMENT=Production
-
 # Set the entry point
 ENTRYPOINT ["dotnet", "RawgApi.dll"] 
