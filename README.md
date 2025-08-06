@@ -300,29 +300,15 @@ rawg-api-dotnet/
 5. Update documentation
 6. Submit a pull request
 
-## Status
-
-This project is **production-ready** with:
-
-* ✅ Complete RAWG API implementation
-* ✅ Published NuGet packages (RawgApi.Models, RawgApi.Client)
-* ✅ Docker containerization
-* ✅ Comprehensive documentation
-* ✅ API key authentication and security
-* ✅ CORS configuration
-* ✅ Health checks and monitoring
-
 ## Links
 
 * **RAWG API Documentation**: https://api.rawg.io/docs/
-* **GitHub Repository**: https://github.com/your-username/rawg-api-dotnet
+* **GitHub Repository**: https://github.com/lilchim/rawg-api-dotnet
 * **NuGet Packages**: 
   * RawgApi.Models
   * RawgApi.Client
 
-## License
 
-This project is open source and available under the MIT License.
 
 ## API Key Authentication
 
@@ -379,3 +365,7 @@ Cross-Origin Resource Sharing (CORS) is configurable to control which domains ca
   }
 }
 ```
+
+## License
+
+This project is open source and available under the MIT License.
