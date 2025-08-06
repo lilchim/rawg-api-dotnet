@@ -14,7 +14,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>RawgApi.Client</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>SGNOME</Authors>
     <Description>Client library for RAWG API integration</Description>
     <PackageTags>rawg;api;client;games</PackageTags>
